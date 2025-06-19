@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(210, 83%, 53%);
+  --primary-foreground: hsl(210, 100%, 98%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+
+  /* Trading specific colors */
+  --trading-dark: hsl(0, 0%, 7.1%);
+  --trading-surface: hsl(0, 0%, 11.8%);
+  --trading-primary: hsl(210, 83%, 53%);
+  --trading-success: hsl(120, 61%, 34%);
+  --trading-warning: hsl(36, 100%, 48%);
+  --trading-error: hsl(0, 70%, 50%);
+  --trading-text: hsl(0, 0%, 88%);
+  --trading-muted: hsl(0, 0%, 62%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(210, 83%, 53%);
+  --primary-foreground: hsl(210, 100%, 98%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+
+  /* Dark mode trading colors */
+  --trading-dark: hsl(0, 0%, 7.1%);
+  --trading-surface: hsl(0, 0%, 11.8%);
+  --trading-primary: hsl(210, 83%, 53%);
+  --trading-success: hsl(120, 61%, 34%);
+  --trading-warning: hsl(36, 100%, 48%);
+  --trading-error: hsl(0, 70%, 50%);
+  --trading-text: hsl(0, 0%, 88%);
+  --trading-muted: hsl(0, 0%, 62%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  /* Trading specific styles */
+  .trading-dark {
+    background-color: var(--trading-dark);
+    color: var(--trading-text);
+  }
+
+  .trading-surface {
+    background-color: var(--trading-surface);
+  }
+
+  .trading-primary {
+    background-color: var(--trading-primary);
+    color: var(--primary-foreground);
+  }
+
+  .trading-success {
+    color: var(--trading-success);
+  }
+
+  .trading-warning {
+    color: var(--trading-warning);
+  }
+
+  .trading-error {
+    color: var(--trading-error);
+  }
+
+  .trading-muted {
+    color: var(--trading-muted);
+  }
+
+  /* Custom scrollbar for dark theme */
+  .dark ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: hsl(240, 3.7%, 15.9%);
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: hsl(240, 5%, 34%);
+    border-radius: 4px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: hsl(240, 5%, 44%);
+  }
+
+  /* Animation for status indicators */
+  @keyframes pulse-success {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .animate-pulse-success {
+    animation: pulse-success 2s infinite;
+  }
+
+  /* Chart container styles */
+  .chart-container {
+    background: var(--trading-surface);
+    border: 1px solid hsl(240, 3.7%, 25.9%);
+  }
+
+  /* Trade status badges */
+  .status-buy {
+    background-color: var(--trading-success);
+    color: white;
+  }
+
+  .status-sell {
+    background-color: var(--trading-error);
+    color: white;
+  }
+
+  .status-hold {
+    background-color: hsl(240, 5%, 34%);
+    color: white;
+  }
+}
