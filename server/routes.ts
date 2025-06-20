@@ -152,6 +152,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Market data route
+  app.get("/api/market-data/:symbol", async (req, res) => {
+    try {
+      const symbol = req.params.symbol;
+      const marketData = await storage.getMarketData(symbol);
+      
+      if (!marketData) {
+        // Return live-like data structure for demo
+        const demoData = {
+          symbol,
+          price: (1.0850 + Math.random() * 0.01).toFixed(5),
+          change: ((Math.random() - 0.5) * 0.002).toFixed(5),
+          indicators: {
+            support: (1.0820 + Math.random() * 0.005).toFixed(5),
+            resistance: (1.0920 + Math.random() * 0.005).toFixed(5),
+            rsi: (50 + Math.random() * 30).toFixed(1),
+            atr: (0.0040 + Math.random() * 0.001).toFixed(6),
+            sma20: (1.0865 + Math.random() * 0.005).toFixed(5),
+            sma50: (1.0875 + Math.random() * 0.005).toFixed(5),
+          },
+          timestamp: new Date().toISOString()
+        };
+        return res.json(demoData);
+      }
+      
+      res.json(marketData);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch market data" });
+    }
+  });
+
   // Dashboard summary route
   app.get("/api/dashboard/:userId", async (req, res) => {
     try {

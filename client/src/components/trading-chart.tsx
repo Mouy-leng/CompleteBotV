@@ -17,7 +17,7 @@ export default function TradingChart({
   const chartRef = useRef<HTMLCanvasElement>(null);
   const [chart, setChart] = useState<any>(null);
 
-  const { data: marketData } = useQuery({
+  const { data: marketData } = useQuery<any>({
     queryKey: [`/api/market-data/${symbol}`],
     refetchInterval: 5000,
   });
@@ -123,35 +123,38 @@ export default function TradingChart({
   }, [symbol, marketData]);
 
   const indicators = marketData?.indicators || {
-    support: 1.0850,
-    resistance: 1.0920,
-    rsi: 65.4,
-    atr: 0.0045,
+    support: "1.0850",
+    resistance: "1.0920", 
+    rsi: "65.4",
+    atr: "0.0045",
   };
 
   return (
-    <div className="trading-surface rounded-xl p-6 border border-gray-700">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-semibold text-white">Live Market Analysis</h3>
+    <div className="trading-surface rounded-2xl p-8 trading-glow">
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h3 className="text-2xl font-bold trading-text mb-2">Live Market Analysis</h3>
+          <p className="trading-muted text-sm">Real-time price action with AI predictions</p>
+        </div>
         <div className="flex items-center space-x-4">
           <select 
             value={symbol}
             onChange={(e) => onSymbolChange(e.target.value)}
-            className="bg-gray-700 text-white rounded-lg px-3 py-2 text-sm border border-gray-600 focus:border-trading-primary focus:outline-none"
+            className="bg-trading-surface-light text-trading-text rounded-xl px-4 py-3 text-sm border trading-border focus:border-trading-primary focus:outline-none trading-glow"
           >
             {symbols.map(s => (
               <option key={s} value={s}>{s}</option>
             ))}
           </select>
-          <div className="flex bg-gray-700 rounded-lg p-1">
+          <div className="flex bg-trading-surface-light rounded-xl p-2 space-x-1">
             {timeframes.map(tf => (
               <button
                 key={tf}
                 onClick={() => onTimeframeChange(tf)}
-                className={`px-3 py-1 text-sm rounded ${
+                className={`px-4 py-2 text-sm rounded-lg font-medium transition-all duration-200 ${
                   timeframe === tf 
-                    ? 'bg-trading-primary text-white' 
-                    : 'text-trading-muted hover:text-white'
+                    ? 'trading-primary-gradient text-white trading-glow' 
+                    : 'trading-muted hover:text-trading-text hover:bg-trading-border'
                 }`}
               >
                 {tf}
@@ -161,27 +164,38 @@ export default function TradingChart({
         </div>
       </div>
       
-      <div className="h-80 chart-container rounded-lg flex items-center justify-center">
+      <div className="h-96 trading-surface-light rounded-2xl p-4 mb-6 relative overflow-hidden">
         <canvas ref={chartRef} className="w-full h-full"></canvas>
+        
+        {/* Chart overlay indicators */}
+        <div className="absolute top-4 left-4 flex space-x-4">
+          <div className="bg-trading-surface/80 rounded-lg px-3 py-2 backdrop-blur-sm">
+            <span className="text-trading-success text-sm font-medium">
+              <i className="fas fa-arrow-up mr-1"></i>
+              +0.14%
+            </span>
+          </div>
+          <div className="bg-trading-surface/80 rounded-lg px-3 py-2 backdrop-blur-sm">
+            <span className="text-trading-primary text-sm font-medium">
+              <i className="fas fa-robot mr-1"></i>
+              AI: BUY 87%
+            </span>
+          </div>
+        </div>
       </div>
       
-      <div className="mt-4 grid grid-cols-4 gap-4">
-        <div className="text-center">
-          <p className="text-trading-muted text-sm">Support</p>
-          <p className="text-white font-semibold">{indicators.support?.toFixed(4) || 'N/A'}</p>
-        </div>
-        <div className="text-center">
-          <p className="text-trading-muted text-sm">Resistance</p>
-          <p className="text-white font-semibold">{indicators.resistance?.toFixed(4) || 'N/A'}</p>
-        </div>
-        <div className="text-center">
-          <p className="text-trading-muted text-sm">RSI</p>
-          <p className="text-white font-semibold">{indicators.rsi?.toFixed(1) || 'N/A'}</p>
-        </div>
-        <div className="text-center">
-          <p className="text-trading-muted text-sm">ATR</p>
-          <p className="text-white font-semibold">{indicators.atr?.toFixed(4) || 'N/A'}</p>
-        </div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { label: "Support", value: typeof indicators.support === 'string' ? indicators.support : indicators.support?.toFixed(5) || 'N/A', color: "text-trading-error" },
+          { label: "Resistance", value: typeof indicators.resistance === 'string' ? indicators.resistance : indicators.resistance?.toFixed(5) || 'N/A', color: "text-trading-success" },
+          { label: "RSI", value: typeof indicators.rsi === 'string' ? indicators.rsi : indicators.rsi?.toFixed(1) || 'N/A', color: "text-trading-primary" },
+          { label: "ATR", value: typeof indicators.atr === 'string' ? indicators.atr : indicators.atr?.toFixed(5) || 'N/A', color: "text-trading-warning" }
+        ].map((indicator, index) => (
+          <div key={index} className="text-center p-4 rounded-xl bg-trading-surface-light/50">
+            <p className="trading-muted text-sm font-medium mb-2">{indicator.label}</p>
+            <p className={`text-xl font-bold ${indicator.color}`}>{indicator.value}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

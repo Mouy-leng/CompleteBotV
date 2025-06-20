@@ -1,0 +1,157 @@
+{
+  "environment": "demo",
+  "project": {
+    "name": "CAPITALend AI Trading Bot",
+    "version": "1.0.0",
+    "description": "Professional AI-powered trading system with multi-asset support"
+  },
+  "environments": {
+    "demo": {
+      "trading_mode": "demo",
+      "database_url": "sqlite:///trading_bot_demo.db",
+      "log_level": "INFO",
+      "max_trades_per_minute": 5,
+      "risk_settings": {
+        "max_risk_per_trade": 1.0,
+        "max_total_risk": 5.0,
+        "max_drawdown": 10.0,
+        "max_position_size": 2.0,
+        "max_daily_loss": 3.0
+      },
+      "brokers": {
+        "capital_com": {
+          "api_key": "${CAPITAL_API_KEY_DEMO}",
+          "api_secret": "${CAPITAL_API_SECRET_DEMO}",
+          "account_id": "${CAPITAL_ACCOUNT_ID_DEMO}",
+          "environment": "demo",
+          "enabled": true
+        },
+        "binance": {
+          "api_key": "${BINANCE_API_KEY_DEMO}",
+          "api_secret": "${BINANCE_API_SECRET_DEMO}",
+          "testnet": true,
+          "enabled": true
+        },
+        "metatrader": {
+          "server": "${MT5_SERVER_DEMO}",
+          "login": "${MT5_LOGIN_DEMO}",
+          "password": "${MT5_PASSWORD_DEMO}",
+          "enabled": false
+        }
+      },
+      "data_sources": {
+        "fred_api_key": "${FRED_API_KEY}",
+        "fmp_api_key": "${FMP_API_KEY}",
+        "news_api_key": "${NEWS_API_KEY}"
+      },
+      "notifications": {
+        "telegram": {
+          "bot_token": "${TELEGRAM_BOT_TOKEN}",
+          "chat_id": "${TELEGRAM_CHAT_ID}",
+          "enabled": true
+        },
+        "discord": {
+          "webhook_url": "${DISCORD_WEBHOOK_URL}",
+          "enabled": false
+        },
+        "slack": {
+          "webhook_url": "${SLACK_WEBHOOK_URL}",
+          "enabled": false
+        }
+      }
+    },
+    "live": {
+      "trading_mode": "live",
+      "database_url": "postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}",
+      "log_level": "WARNING",
+      "max_trades_per_minute": 10,
+      "risk_settings": {
+        "max_risk_per_trade": 2.0,
+        "max_total_risk": 10.0,
+        "max_drawdown": 15.0,
+        "max_position_size": 5.0,
+        "max_daily_loss": 5.0
+      },
+      "brokers": {
+        "capital_com": {
+          "api_key": "${CAPITAL_API_KEY_LIVE}",
+          "api_secret": "${CAPITAL_API_SECRET_LIVE}",
+          "account_id": "${CAPITAL_ACCOUNT_ID_LIVE}",
+          "environment": "live",
+          "enabled": true
+        },
+        "binance": {
+          "api_key": "${BINANCE_API_KEY_LIVE}",
+          "api_secret": "${BINANCE_API_SECRET_LIVE}",
+          "testnet": false,
+          "enabled": true
+        },
+        "metatrader": {
+          "server": "${MT5_SERVER_LIVE}",
+          "login": "${MT5_LOGIN_LIVE}",
+          "password": "${MT5_PASSWORD_LIVE}",
+          "enabled": true
+        }
+      },
+      "data_sources": {
+        "fred_api_key": "${FRED_API_KEY}",
+        "fmp_api_key": "${FMP_API_KEY}",
+        "news_api_key": "${NEWS_API_KEY}"
+      },
+      "notifications": {
+        "telegram": {
+          "bot_token": "${TELEGRAM_BOT_TOKEN}",
+          "chat_id": "${TELEGRAM_CHAT_ID}",
+          "enabled": true
+        },
+        "discord": {
+          "webhook_url": "${DISCORD_WEBHOOK_URL}",
+          "enabled": true
+        },
+        "slack": {
+          "webhook_url": "${SLACK_WEBHOOK_URL}",
+          "enabled": false
+        }
+      }
+    }
+  },
+  "ai_models": {
+    "lstm": {
+      "enabled": true,
+      "confidence_threshold": 70,
+      "retrain_interval_hours": 24,
+      "model_path": "models/trained/lstm_model.joblib"
+    },
+    "xgboost": {
+      "enabled": true,
+      "confidence_threshold": 65,
+      "retrain_interval_hours": 12,
+      "model_path": "models/trained/xgboost_model.joblib"
+    },
+    "cnn": {
+      "enabled": true,
+      "confidence_threshold": 75,
+      "retrain_interval_hours": 18,
+      "model_path": "models/trained/cnn_model.joblib"
+    }
+  },
+  "trading_symbols": {
+    "forex": ["EUR/USD", "GBP/USD", "USD/JPY", "GBP/JPY", "AUD/USD", "USD/CAD"],
+    "crypto": ["BTC/USD", "ETH/USD", "ADA/USD", "SOL/USD"],
+    "stocks": ["AAPL", "GOOGL", "TSLA", "MSFT", "AMZN"],
+    "commodities": ["XAUUSD", "XAGUSD", "USOIL", "UKOIL"]
+  },
+  "websocket": {
+    "enabled": true,
+    "port": 5000,
+    "heartbeat_interval": 30000,
+    "reconnect_attempts": 5,
+    "reconnect_interval": 3000
+  },
+  "security": {
+    "api_rate_limit": 100,
+    "session_timeout": 3600,
+    "encryption_key": "${ENCRYPTION_KEY}",
+    "cors_origins": ["http://localhost:3000", "https://*.replit.dev"]
+  }
+}

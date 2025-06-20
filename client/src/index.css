@@ -22,50 +22,70 @@
   --destructive: hsl(0, 84.2%, 60.2%);
   --destructive-foreground: hsl(60, 9.1%, 97.8%);
   --ring: hsl(20, 14.3%, 4.1%);
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
-  /* Trading specific colors */
-  --trading-dark: hsl(0, 0%, 7.1%);
-  --trading-surface: hsl(0, 0%, 11.8%);
-  --trading-primary: hsl(210, 83%, 53%);
-  --trading-success: hsl(120, 61%, 34%);
-  --trading-warning: hsl(36, 100%, 48%);
-  --trading-error: hsl(0, 70%, 50%);
-  --trading-text: hsl(0, 0%, 88%);
-  --trading-muted: hsl(0, 0%, 62%);
+  /* Modern Trading Dashboard Colors - Blue Light Theme */
+  --trading-dark: hsl(220, 26%, 8%);
+  --trading-surface: hsl(220, 22%, 12%);
+  --trading-surface-light: hsl(220, 20%, 16%);
+  --trading-primary: hsl(195, 100%, 50%);
+  --trading-primary-light: hsl(195, 85%, 60%);
+  --trading-secondary: hsl(170, 76%, 42%);
+  --trading-accent: hsl(280, 100%, 70%);
+  --trading-success: hsl(142, 76%, 42%);
+  --trading-success-light: hsl(142, 65%, 55%);
+  --trading-warning: hsl(38, 92%, 50%);
+  --trading-error: hsl(0, 84%, 60%);
+  --trading-text: hsl(210, 20%, 95%);
+  --trading-text-muted: hsl(215, 16%, 65%);
+  --trading-border: hsl(220, 13%, 18%);
+  --trading-border-light: hsl(220, 13%, 25%);
+  
+  /* Gradient backgrounds */
+  --trading-gradient-primary: linear-gradient(135deg, hsl(195, 100%, 50%) 0%, hsl(170, 76%, 42%) 100%);
+  --trading-gradient-card: linear-gradient(135deg, hsl(220, 22%, 12%) 0%, hsl(220, 20%, 16%) 100%);
+  --trading-gradient-success: linear-gradient(135deg, hsl(142, 76%, 42%) 0%, hsl(142, 65%, 55%) 100%);
+  --trading-gradient-error: linear-gradient(135deg, hsl(0, 84%, 60%) 0%, hsl(15, 84%, 55%) 100%);
 }
 
 .dark {
-  --background: hsl(240, 10%, 3.9%);
-  --foreground: hsl(0, 0%, 98%);
-  --muted: hsl(240, 3.7%, 15.9%);
-  --muted-foreground: hsl(240, 5%, 64.9%);
-  --popover: hsl(240, 10%, 3.9%);
-  --popover-foreground: hsl(0, 0%, 98%);
-  --card: hsl(240, 10%, 3.9%);
-  --card-foreground: hsl(0, 0%, 98%);
-  --border: hsl(240, 3.7%, 15.9%);
-  --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(210, 83%, 53%);
-  --primary-foreground: hsl(210, 100%, 98%);
-  --secondary: hsl(240, 3.7%, 15.9%);
-  --secondary-foreground: hsl(0, 0%, 98%);
-  --accent: hsl(240, 3.7%, 15.9%);
-  --accent-foreground: hsl(0, 0%, 98%);
-  --destructive: hsl(0, 62.8%, 30.6%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(240, 4.9%, 83.9%);
-  --radius: 0.5rem;
+  --background: hsl(220, 26%, 8%);
+  --foreground: hsl(210, 20%, 95%);
+  --muted: hsl(220, 22%, 12%);
+  --muted-foreground: hsl(215, 16%, 65%);
+  --popover: hsl(220, 22%, 12%);
+  --popover-foreground: hsl(210, 20%, 95%);
+  --card: hsl(220, 22%, 12%);
+  --card-foreground: hsl(210, 20%, 95%);
+  --border: hsl(220, 13%, 18%);
+  --input: hsl(220, 13%, 18%);
+  --primary: hsl(195, 100%, 50%);
+  --primary-foreground: hsl(220, 26%, 8%);
+  --secondary: hsl(220, 20%, 16%);
+  --secondary-foreground: hsl(210, 20%, 95%);
+  --accent: hsl(220, 20%, 16%);
+  --accent-foreground: hsl(210, 20%, 95%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(210, 20%, 95%);
+  --ring: hsl(195, 100%, 50%);
+  --radius: 0.75rem;
 
-  /* Dark mode trading colors */
-  --trading-dark: hsl(0, 0%, 7.1%);
-  --trading-surface: hsl(0, 0%, 11.8%);
-  --trading-primary: hsl(210, 83%, 53%);
-  --trading-success: hsl(120, 61%, 34%);
-  --trading-warning: hsl(36, 100%, 48%);
-  --trading-error: hsl(0, 70%, 50%);
-  --trading-text: hsl(0, 0%, 88%);
-  --trading-muted: hsl(0, 0%, 62%);
+  /* Modern Blue Light Trading Theme */
+  --trading-dark: hsl(220, 26%, 8%);
+  --trading-surface: hsl(220, 22%, 12%);
+  --trading-surface-light: hsl(220, 20%, 16%);
+  --trading-primary: hsl(195, 100%, 50%);
+  --trading-primary-light: hsl(195, 85%, 60%);
+  --trading-secondary: hsl(170, 76%, 42%);
+  --trading-accent: hsl(280, 100%, 70%);
+  --trading-success: hsl(142, 76%, 42%);
+  --trading-success-light: hsl(142, 65%, 55%);
+  --trading-warning: hsl(38, 92%, 50%);
+  --trading-error: hsl(0, 84%, 60%);
+  --trading-text: hsl(210, 20%, 95%);
+  --trading-text-muted: hsl(215, 16%, 65%);
+  --trading-border: hsl(220, 13%, 18%);
+  --trading-border-light: hsl(220, 13%, 25%);
 }
 
 @layer base {
@@ -77,23 +97,47 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 
-  /* Trading specific styles */
+  /* Modern Trading Dashboard Styles */
   .trading-dark {
-    background-color: var(--trading-dark);
+    background: var(--trading-dark);
     color: var(--trading-text);
   }
 
   .trading-surface {
-    background-color: var(--trading-surface);
+    background: var(--trading-surface);
+    border: 1px solid var(--trading-border);
+    border-radius: var(--radius);
+    backdrop-filter: blur(10px);
+  }
+
+  .trading-surface-light {
+    background: var(--trading-surface-light);
+    border: 1px solid var(--trading-border-light);
   }
 
   .trading-primary {
-    background-color: var(--trading-primary);
+    background: var(--trading-primary);
     color: var(--primary-foreground);
+  }
+
+  .trading-primary-gradient {
+    background: var(--trading-gradient-primary);
+  }
+
+  .trading-card-gradient {
+    background: var(--trading-gradient-card);
   }
 
   .trading-success {
     color: var(--trading-success);
+  }
+
+  .trading-success-bg {
+    background: var(--trading-success);
+  }
+
+  .trading-success-gradient {
+    background: var(--trading-gradient-success);
   }
 
   .trading-warning {
@@ -104,8 +148,32 @@
     color: var(--trading-error);
   }
 
+  .trading-error-gradient {
+    background: var(--trading-gradient-error);
+  }
+
+  .trading-text {
+    color: var(--trading-text);
+  }
+
   .trading-muted {
-    color: var(--trading-muted);
+    color: var(--trading-text-muted);
+  }
+
+  .trading-border {
+    border-color: var(--trading-border);
+  }
+
+  .trading-glow {
+    box-shadow: 0 0 20px hsla(195, 100%, 50%, 0.3);
+  }
+
+  .trading-glow-success {
+    box-shadow: 0 0 15px hsla(142, 76%, 42%, 0.4);
+  }
+
+  .trading-glow-error {
+    box-shadow: 0 0 15px hsla(0, 84%, 60%, 0.4);
   }
 
   /* Custom scrollbar for dark theme */

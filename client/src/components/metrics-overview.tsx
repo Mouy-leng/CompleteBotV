@@ -22,59 +22,99 @@ export default function MetricsOverview({ portfolio }: MetricsOverviewProps) {
     return `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
   };
 
+  const formatLargeNumber = (value: number) => {
+    if (value >= 1000000) {
+      return `$${(value / 1000000).toFixed(1)}M`;
+    } else if (value >= 1000) {
+      return `$${(value / 1000).toFixed(1)}K`;
+    }
+    return formatCurrency(value);
+  };
+
   const metrics = [
     {
-      title: "Total Portfolio Value",
-      value: formatCurrency(totalValue),
+      title: "Total Balance",
+      value: formatLargeNumber(totalValue),
       change: "+12.5%",
-      icon: "fas fa-dollar-sign",
-      color: "trading-success",
-      bgColor: "bg-trading-success/20",
+      changeValue: "+$6,420",
+      icon: "fas fa-wallet",
+      trend: "up",
+      gradient: "trading-primary-gradient",
     },
     {
       title: "Daily P&L",
       value: formatCurrency(dailyPnL),
-      change: dailyPnL >= 0 ? "+8.2%" : "-8.2%",
+      change: dailyPnL >= 0 ? "+1.6%" : "-1.6%",
+      changeValue: dailyPnL >= 0 ? "+$820" : "-$820",
       icon: "fas fa-chart-line",
-      color: "trading-primary",
-      bgColor: "bg-trading-primary/20",
+      trend: dailyPnL >= 0 ? "up" : "down",
+      gradient: dailyPnL >= 0 ? "trading-success-gradient" : "trading-error-gradient",
     },
     {
-      title: "AI Win Rate",
-      value: "85%",
-      change: "85%",
-      icon: "fas fa-robot",
-      color: "trading-warning",
-      bgColor: "bg-trading-warning/20",
-      subtitle: "Last 100 Trades",
+      title: "Open Trades",
+      value: "12",
+      change: "+3",
+      changeValue: "Active",
+      icon: "fas fa-exchange-alt",
+      trend: "up",
+      gradient: "trading-secondary bg-gradient-to-r from-teal-400 to-cyan-400",
+    },
+    {
+      title: "Win Rate",
+      value: "87%",
+      change: "+2.1%",
+      changeValue: "This Week",
+      icon: "fas fa-target",
+      trend: "up",
+      gradient: "bg-gradient-to-r from-purple-400 to-pink-400",
     },
     {
       title: "Risk Exposure",
       value: formatPercentage(riskExposure),
-      change: "2.5%",
+      change: "Low Risk",
+      changeValue: "Safe Zone",
       icon: "fas fa-shield-alt",
-      color: riskExposure > 5 ? "trading-error" : "trading-success",
-      bgColor: riskExposure > 5 ? "bg-red-500/20" : "bg-green-500/20",
-      subtitle: "Current Drawdown",
-    },
+      trend: riskExposure > 5 ? "down" : "up",
+      gradient: riskExposure > 5 ? "trading-error-gradient" : "trading-success-gradient",
+    }
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
       {metrics.map((metric, index) => (
-        <div key={index} className="trading-surface rounded-xl p-6 border border-gray-700">
-          <div className="flex items-center justify-between mb-4">
-            <div className={`w-12 h-12 ${metric.bgColor} rounded-lg flex items-center justify-center`}>
-              <i className={`${metric.icon} text-${metric.color} text-xl`}></i>
+        <div key={index} className="trading-surface rounded-2xl p-6 trading-glow relative overflow-hidden">
+          {/* Background gradient overlay */}
+          <div className={`absolute inset-0 ${metric.gradient} opacity-10`}></div>
+          
+          <div className="relative z-10">
+            <div className="flex items-center justify-between mb-4">
+              <div className={`w-12 h-12 ${metric.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
+                <i className={`${metric.icon} text-white text-lg`}></i>
+              </div>
+              <div className={`flex items-center space-x-1 text-xs font-medium ${
+                metric.trend === 'up' ? 'text-trading-success' : 
+                metric.trend === 'down' ? 'text-trading-error' : 'text-trading-muted'
+              }`}>
+                <i className={`fas ${metric.trend === 'up' ? 'fa-arrow-up' : 'fa-arrow-down'}`}></i>
+                <span>{metric.change}</span>
+              </div>
             </div>
-            <span className={`text-${metric.color} text-sm font-medium`}>
-              {metric.change}
-            </span>
+            
+            <div className="mb-3">
+              <h3 className="text-2xl font-bold trading-text mb-1">{metric.value}</h3>
+              <p className="text-xs trading-muted font-medium">{metric.changeValue}</p>
+            </div>
+            
+            <p className="text-xs trading-muted uppercase tracking-wide font-medium">
+              {metric.title}
+            </p>
+
+            {/* Mini trend line */}
+            <div className="mt-3 h-1 bg-trading-border rounded-full overflow-hidden">
+              <div className={`h-full ${metric.gradient} rounded-full transition-all duration-500`} 
+                   style={{ width: `${Math.random() * 40 + 40}%` }}></div>
+            </div>
           </div>
-          <h3 className="text-2xl font-bold text-white mb-1">{metric.value}</h3>
-          <p className="text-trading-muted text-sm">
-            {metric.subtitle || metric.title}
-          </p>
         </div>
       ))}
     </div>
