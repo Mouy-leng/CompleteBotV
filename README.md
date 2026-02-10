@@ -1,5 +1,10 @@
 # CAPITALend AI Trading Bot
 
+## 📓 Knowledge Base
+- **NotebookLM**: [Access here](https://notebooklm.google.com/notebook/e8f4c29d-9aec-4d5f-8f51-2ca168687616)
+- **Note**: This notebook is available for reading and writing. AI agents must read it before starting work.
+
+
 A professional-grade AI-powered trading system with multi-asset support, advanced pattern recognition, real-time execution, and comprehensive monitoring.
 
 ![Trading Dashboard](https://img.shields.io/badge/Dashboard-Modern%20Blue%20Theme-blue)
